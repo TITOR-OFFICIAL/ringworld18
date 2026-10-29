@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "${modid}",
+    "name": "RingWorld",
+    "description": "Ring world type for Minecraft 1.8.9: the overworld wraps around along the X axis.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
