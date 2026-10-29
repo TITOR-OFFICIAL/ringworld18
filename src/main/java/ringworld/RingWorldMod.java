@@ -19,6 +19,9 @@ public class RingWorldMod {
     /** Длина кольца в чанках (кратна 4). Берётся из config/ringworld18.cfg. */
     public static volatile int ringChunks = 256;
 
+    /** Полуширина ленты в блоках: невидимая стена на z = +-значение. 0 = без стены. */
+    public static volatile int halfWidth = 1000;
+
     public static WorldType ringType;
 
     @Mod.EventHandler
@@ -27,6 +30,9 @@ public class RingWorldMod {
         int n = cfg.getInt("ringLengthChunks", "ring", 256, 16, 8192,
                 "Длина кольца в чанках (1 чанк = 16 блоков). 256 = 4096 блоков. "
                 + "Округляется вниз до числа, кратного 4. НЕ МЕНЯТЬ после создания мира!");
+        halfWidth = cfg.getInt("halfWidthBlocks", "ring", 1000, 0, 29999000,
+                "Полуширина ленты в блоках: невидимая стена на z = +-значение (1000 = лента шириной 2000). "
+                + "0 = без стены (мир бесконечен на север и юг). Можно менять в любой момент.");
         if (cfg.hasChanged()) {
             cfg.save();
         }
