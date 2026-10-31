@@ -66,14 +66,16 @@ public class RingWrapHandler {
             mp.playerNetServerHandler.setPlayerLocation(dx, 0.0D, 0.0D, 0.0F, 0.0F, ALL_RELATIVE);
         }
 
-        // 2) стена ленты по Z: возвращаем игрока к границе, движение вдоль Z обнуляется
+        // 2) страховка у бедроковой стены: свободная полоса - z от -hw до +hw.
+        // Если игрок каким-то образом оказался в стене или за ней (команда /tp, старые чанки без стены),
+        // возвращаем его внутрь; движение вдоль Z обнуляется.
         final int hw = RingWorldMod.halfWidth;
         if (hw > 0) {
             double target;
-            if (player.posZ > hw) {
-                target = hw - 0.05D;
-            } else if (player.posZ < -hw) {
-                target = -hw + 0.05D;
+            if (player.posZ > hw - 0.1D) {
+                target = hw - 0.5D;
+            } else if (player.posZ < -hw + 0.1D) {
+                target = -hw + 0.5D;
             } else {
                 return;
             }
